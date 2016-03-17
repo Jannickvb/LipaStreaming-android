@@ -29,7 +29,7 @@ public class DeviceActivity extends AppCompatActivity {
 
         DeviceItem[] temp = new DeviceItem[10];
         for(int i = 0;i<10;i++){
-            temp[i] = new DeviceItem("device " + (i + 1),"BESTE ID OOIT","Avans","1292.22929.2");
+            temp[i] = new DeviceItem("BESTE ID OOIT","device " + (i + 1),"een mooi dingeske","Avans");
         }
 
         devices = (ListView)findViewById(R.id.list_devices);

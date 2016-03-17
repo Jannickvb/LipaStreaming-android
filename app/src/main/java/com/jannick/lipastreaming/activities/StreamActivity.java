@@ -26,7 +26,7 @@ public class StreamActivity extends AppCompatActivity {
 
         StreamItem[] temp = new StreamItem[10];
         for(int i = 0;i<10;i++){
-            temp[i] = new StreamItem("stream " + (i + 1),"1292.22929.2");
+            temp[i] = new StreamItem("stream " + (i + 1),"1292.22929.2","80","test");
         }
 
         streams = (ListView)findViewById(R.id.list_streams);

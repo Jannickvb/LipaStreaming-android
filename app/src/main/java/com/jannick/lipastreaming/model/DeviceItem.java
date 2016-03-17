@@ -5,14 +5,22 @@ package com.jannick.lipastreaming.model;
  */
 public class DeviceItem {
 
-    private String name,id,location,desc;
+    private String device,name,description,location;
     private boolean currentDevice = false;
 
-    public DeviceItem(String name, String id, String location, String desc){
+    public DeviceItem(String device, String name, String description, String location) {
+        this.device = device;
         this.name = name;
-        this.id = id;
+        this.description = description;
         this.location = location;
-        this.desc = desc;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
     }
 
     public String getName() {
@@ -23,12 +31,12 @@ public class DeviceItem {
         this.name = name;
     }
 
-    public String getId() {
-        return id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getLocation() {
@@ -37,14 +45,6 @@ public class DeviceItem {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
     }
 
     public boolean isCurrentDevice() {

@@ -34,7 +34,7 @@ public class DeviceAdapter extends ArrayAdapter<DeviceItem>{
         TextView desc = (TextView)v.findViewById(R.id.device_desc);
 
         name.setText(item.getName());
-        desc.setText(item.getDesc());
+        desc.setText(item.getDescription());
 
         return v;
     }

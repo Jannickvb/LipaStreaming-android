@@ -3,12 +3,13 @@ package com.jannick.lipastreaming.model;
 /**
  * Created by Jannick on 17-3-2016.
  */
-public class StreamItem {
+public class AlarmItem {
 
-    private String name,ip,port,path;
+    String name,time,ip,port,path;
 
-    public StreamItem(String name, String ip, String port, String path){
+    public AlarmItem(String name, String time, String ip, String port, String path) {
         this.name = name;
+        this.time = time;
         this.ip = ip;
         this.port = port;
         this.path = path;
@@ -20,6 +21,14 @@ public class StreamItem {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public String getIp() {
