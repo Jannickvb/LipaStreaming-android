@@ -4,11 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".activities.SplashscreenActivity">
+    tools:context=".activities.launch.SplashscreenActivity">
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:padding="16dp"
-        android:src="@drawable/ic_logo_lipa_large"/>
+        android:src="@drawable/ic_logo_lipa_large"
+      />
 </RelativeLayout>

@@ -1,4 +1,4 @@
-package com.jannick.lipastreaming.activities;
+package com.jannick.lipastreaming.activities.launch;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
