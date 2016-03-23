@@ -3,6 +3,7 @@ package com.jannick.lipastreaming.handlers;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.jannick.lipastreaming.model.LoginToken;
 import com.jannick.lipastreaming.model.User;
 
 /**
@@ -29,7 +30,7 @@ public class UserHandler {
 
     public void setUserLoggedIn(boolean loggedIn){
         SharedPreferences.Editor editor = local.edit();
-        editor.putBoolean("loggedIn",loggedIn);
+        editor.putBoolean("isLoggedIn",loggedIn);
         editor.commit();
     }
 

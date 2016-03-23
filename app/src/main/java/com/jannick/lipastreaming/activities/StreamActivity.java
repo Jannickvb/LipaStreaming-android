@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
@@ -21,8 +22,6 @@ public class StreamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stream);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
         StreamItem[] temp = new StreamItem[10];
         for(int i = 0;i<10;i++){
@@ -41,6 +40,22 @@ public class StreamActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        Toolbar mToolBar;
+        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mToolBar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+        setSupportActionBar(mToolBar);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 }
