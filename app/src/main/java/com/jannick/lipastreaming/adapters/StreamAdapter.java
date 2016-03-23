@@ -8,18 +8,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.jannick.lipastreaming.R;
-import com.jannick.lipastreaming.model.StreamItem;
-
-import org.w3c.dom.Text;
+import com.jannick.lipastreaming.model.jsonTokens.StreamToken;
 
 /**
  * Created by Jannick on 17-3-2016.
  */
-public class StreamAdapter extends ArrayAdapter<StreamItem>{
+public class StreamAdapter extends ArrayAdapter<StreamToken.Stream>{
 
-    StreamItem[] streams;
+    StreamToken.Stream[] streams;
 
-    public StreamAdapter(Context context, StreamItem[] streams){
+    public StreamAdapter(Context context, StreamToken.Stream[] streams){
         super(context, R.layout.list_row_stream,streams);
         this.streams = streams;
     }
@@ -29,7 +27,7 @@ public class StreamAdapter extends ArrayAdapter<StreamItem>{
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View v = inflater.inflate(R.layout.list_row_stream, parent, false);
 
-        StreamItem item = getItem(position);
+        StreamToken.Stream item = getItem(position);
 
         TextView name = (TextView)v.findViewById(R.id.stream_name);
         TextView ip = (TextView)v.findViewById(R.id.stream_ip);

@@ -3,7 +3,6 @@ package com.jannick.lipastreaming.handlers;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.jannick.lipastreaming.model.LoginToken;
 import com.jannick.lipastreaming.model.User;
 
 /**

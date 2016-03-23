@@ -8,17 +8,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.jannick.lipastreaming.R;
-import com.jannick.lipastreaming.model.DeviceItem;
-import com.jannick.lipastreaming.model.StreamItem;
+import com.jannick.lipastreaming.model.jsonTokens.DevicesToken;
 
 /**
  * Created by Jannick on 17-3-2016.
  */
-public class DeviceAdapter extends ArrayAdapter<DeviceItem>{
+public class DeviceAdapter extends ArrayAdapter<DevicesToken.Device>{
 
-    DeviceItem[] devices;
+    DevicesToken.Device[] devices;
 
-    public DeviceAdapter(Context context, DeviceItem[] devices){
+    public DeviceAdapter(Context context, DevicesToken.Device[] devices){
         super(context, R.layout.list_row_device,devices);
         this.devices = devices;
     }
@@ -28,7 +27,7 @@ public class DeviceAdapter extends ArrayAdapter<DeviceItem>{
         LayoutInflater inflater = LayoutInflater.from(getContext());
         View v = inflater.inflate(R.layout.list_row_device, parent, false);
 
-        DeviceItem item = getItem(position);
+        DevicesToken.Device item = getItem(position);
 
         TextView name = (TextView)v.findViewById(R.id.device_name);
         TextView desc = (TextView)v.findViewById(R.id.device_desc);
