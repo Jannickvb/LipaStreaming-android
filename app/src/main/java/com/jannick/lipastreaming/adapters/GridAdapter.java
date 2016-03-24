@@ -1,6 +1,7 @@
 package com.jannick.lipastreaming.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import com.jannick.lipastreaming.activities.AlarmActivity;
 import com.jannick.lipastreaming.activities.DeviceActivity;
 import com.jannick.lipastreaming.activities.SchedulerActivity;
 import com.jannick.lipastreaming.activities.StreamActivity;
+import com.jannick.lipastreaming.model.jsonTokens.AccountToken;
 import com.jannick.lipastreaming.utils.LayoutUtils;
 
 import java.util.ArrayList;
@@ -24,8 +26,10 @@ import java.util.List;
 public final class GridAdapter extends BaseAdapter {
     private final List<Item> mItems = new ArrayList<Item>();
     private final LayoutInflater mInflater;
+    private AccountToken accountToken;
 
-    public GridAdapter(Context context) {
+    public GridAdapter(Context context,AccountToken accountToken) {
+        this.accountToken = accountToken;
         mInflater = LayoutInflater.from(context);
 
         mItems.add(new Item("Devices",       R.drawable.ic_speaker_48dp));
@@ -79,7 +83,9 @@ public final class GridAdapter extends BaseAdapter {
                         LayoutUtils.navigateToActivity(v.getContext(), DeviceActivity.class);
                         break;
                     case "Streams":
-                        LayoutUtils.navigateToActivity(v.getContext(), StreamActivity.class);
+                        Intent intent = new Intent(v.getContext(),StreamActivity.class);
+                        intent.putExtra("device",accountToken.getDevice());
+                        v.getContext().startActivity(intent);
                         break;
                     case "Alarms":
                         LayoutUtils.navigateToActivity(v.getContext(), AlarmActivity.class);

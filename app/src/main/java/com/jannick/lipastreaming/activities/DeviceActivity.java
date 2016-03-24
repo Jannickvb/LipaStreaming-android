@@ -1,5 +1,6 @@
 package com.jannick.lipastreaming.activities;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -25,13 +26,16 @@ public class DeviceActivity extends AppCompatActivity {
     private ListView devices;
     private DeviceAdapter deviceAdapter;
     private String url;
+    private Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device);
+        activity = this;
+        ServerRequestHandler serverRequestHandler = new ServerRequestHandler(this);
 
-        url = "http://lipa.kvewijk.nl/android/devices.php?session=" + ServerRequestHandler.sessionID;
+        url = "http://lipa.kvewijk.nl/android/devices.php?session=" + serverRequestHandler.getLocalPreferences().getString("session","");
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(this,url, new AsyncHttpResponseHandler() {
@@ -44,7 +48,7 @@ public class DeviceActivity extends AppCompatActivity {
 
                 devices = (ListView)findViewById(R.id.list_devices);
 
-                deviceAdapter = new DeviceAdapter(getBaseContext(), list);
+                deviceAdapter = new DeviceAdapter(getBaseContext(), list,activity);
                 devices.setAdapter(deviceAdapter);
 
             }
@@ -54,15 +58,6 @@ public class DeviceActivity extends AppCompatActivity {
                 Log.d("parse","failed device JSON parse");
             }
         });
-
-//        DevicesToken.Device[] temp = new DevicesToken.Device[10];
-//        for(int i = 0;i<10;i++){
-//            temp[i] = new DevicesToken.Device();
-//            temp[i].setLocation("Test");
-//            temp[i].setName("Device " + (i + 1));
-//            temp[i].setDescription("test dingeske");
-//            temp[i].setDevice("IDKE");
-//        }
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -92,5 +87,9 @@ public class DeviceActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 
 }

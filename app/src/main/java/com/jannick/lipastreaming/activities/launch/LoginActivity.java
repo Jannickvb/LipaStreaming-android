@@ -3,6 +3,8 @@ package com.jannick.lipastreaming.activities.launch;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -16,6 +18,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,8 +32,16 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jannick.lipastreaming.R;
 import com.jannick.lipastreaming.activities.MainActivity;
+import com.jannick.lipastreaming.handlers.ServerRequestHandler;
+import com.jannick.lipastreaming.model.jsonTokens.DevicesToken;
+import com.jannick.lipastreaming.model.jsonTokens.LoginToken;
 import com.jannick.lipastreaming.utils.LayoutUtils;
 import com.jannick.lipastreaming.utils.LinkUtils;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.SyncHttpClient;
+
+import cz.msebera.android.httpclient.Header;
 
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -128,9 +139,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(username, password);
+            mAuthTask = new UserLoginTask(username, password,this);
             mAuthTask.execute((Void) null);
-            LayoutUtils.navigateToActivity(this, MainActivity.class);
         }
 
     }
@@ -206,18 +216,42 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private String mUsername;
         private String mPassword;
-
-        UserLoginTask(String username, String password) {
+        private boolean status =false;
+        private LoginToken token;
+        private Context context;
+        UserLoginTask(String username, String password,Context context) {
             mUsername = username;
             mPassword = password;
+            token = new LoginToken();
+            this.context = context;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            //http://lipa.kvewijk.nl/android/login.php?username=USERNAME&password=PASSWORD
-            // TODO: attempt authentication against a network service.
-            // TODO: register the new account here.
-            return true;
+            //
+
+            String s = "http://lipa.kvewijk.nl/android/login.php?username="+mUsername+"&password="+mPassword;
+
+            SyncHttpClient client = new SyncHttpClient();
+            client.get(context,s, new AsyncHttpResponseHandler()
+             {
+                @Override
+                public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                    String responsestr = new String(responseBody);
+                    Gson gson = new Gson();
+                    token = gson.fromJson(responsestr,LoginToken.class);
+                    status = true;
+                    if(token.getSession()==null){
+                        status = false;
+                    }
+                }
+
+                @Override
+                public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                    status = false;
+                }
+            });
+            return status;
         }
 
         @Override
@@ -226,6 +260,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+                ServerRequestHandler handler = new ServerRequestHandler(context);
+                handler.storeSessionData(token);
+
+                SharedPreferences preferences = getSharedPreferences(ServerRequestHandler.SP_NAME,MODE_PRIVATE);
+
+                Log.d("loging", "SESSION ID:"+preferences.getString("session", ""));
+                LayoutUtils.navigateToActivity(context, MainActivity.class);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

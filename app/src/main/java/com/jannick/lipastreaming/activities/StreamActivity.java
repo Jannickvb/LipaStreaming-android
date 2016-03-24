@@ -31,8 +31,10 @@ public class StreamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stream);
 
+        String device = getIntent().getExtras().getString("device","");
+
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(this, "http://lipa.kvewijk.nl/api/streams.php?id=AB1234", new AsyncHttpResponseHandler() {
+        client.get(this, "http://lipa.kvewijk.nl/api/streams.php?id="+device, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String responsestr = new String(responseBody);

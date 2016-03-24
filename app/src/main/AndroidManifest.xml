@@ -68,7 +68,11 @@
             android:name=".activities.edit.AlarmEditActivity"
             android:label="@string/title_activity_alarm_edit"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.edit.DeviceEditActivity" />
+        <activity android:name=".activities.edit.DeviceEditActivity"
+            android:label="@string/title_activity_device_edit"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"
+            />
         <activity android:name=".activities.edit.StreamEditActivity"></activity>
     </application>
 

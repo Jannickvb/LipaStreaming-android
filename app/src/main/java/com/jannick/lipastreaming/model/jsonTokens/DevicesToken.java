@@ -9,6 +9,7 @@ public class DevicesToken {
 
     private boolean succes;
 
+
     private Device[] devices;
 
     public boolean isSucces() {
@@ -32,6 +33,7 @@ public class DevicesToken {
         private String name;
         private String description;
         private String location;
+        private boolean selected;
 
         public String getDevice() {
             return device;
@@ -63,6 +65,14 @@ public class DevicesToken {
 
         public void setLocation(String location) {
             this.location = location;
+        }
+
+        public boolean isSelected() {
+            return selected;
+        }
+
+        public void setSelected(boolean selected) {
+            this.selected = selected;
         }
     }
 }

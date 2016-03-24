@@ -7,7 +7,26 @@ import java.util.List;
  */
 public class StreamToken {
 
+    private boolean succes;
+    private String device;
+
     private Stream[] streams;
+
+    public boolean isSucces() {
+        return succes;
+    }
+
+    public void setSucces(boolean succes) {
+        this.succes = succes;
+    }
+
+    public String getDevice() {
+        return device;
+    }
+
+    public void setDevice(String device) {
+        this.device = device;
+    }
 
     public Stream[] getStreams() {
         return streams;
@@ -17,11 +36,20 @@ public class StreamToken {
         this.streams = streams;
     }
 
-    public static class Stream {
+    public static class Stream{
+        private int id;
         private String name;
         private String ip;
-        private String port;
+        private int port;
         private String path;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
 
         public String getName() {
             return name;
@@ -39,11 +67,11 @@ public class StreamToken {
             this.ip = ip;
         }
 
-        public String getPort() {
+        public int getPort() {
             return port;
         }
 
-        public void setPort(String port) {
+        public void setPort(int port) {
             this.port = port;
         }
 

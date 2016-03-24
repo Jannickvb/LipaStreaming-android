@@ -24,8 +24,10 @@
     <!-- Strings related to Settings -->
 
     <string name="action_settings">Settings</string>
+    <string name="action_logout">Sign Out</string>
 
     <!-- Strings related to URLS -->
     <string name="url_register">http://lipa.kvewijk.nl/manage/login</string>
-    <string name="title_activity_alarm_edit">AlarmEditActivity</string>
+    <string name="title_activity_alarm_edit">Edit Alarm</string>
+    <string name="title_activity_device_edit">Edit Device</string>
 </resources>
