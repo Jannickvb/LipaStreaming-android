@@ -7,13 +7,13 @@ import java.util.List;
  */
 public class AlarmToken {
 
-    private List<Alarm> alarms;
+    private Alarm[] alarms;
 
-    public List<Alarm> getAlarms() {
+    public Alarm[] getAlarms() {
         return alarms;
     }
 
-    public void setAlarms(List<Alarm> alarms) {
+    public void setAlarms(Alarm[] alarms) {
         this.alarms = alarms;
     }
 

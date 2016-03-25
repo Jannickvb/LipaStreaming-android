@@ -32,6 +32,7 @@ public class LinkUtils {
         });
     }
 
+
     public static void launchHyperlink(View view, String url){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         view.getContext().startActivity(browserIntent);
