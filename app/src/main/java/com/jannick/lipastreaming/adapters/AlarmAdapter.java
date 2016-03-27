@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jannick.lipastreaming.R;
+import com.jannick.lipastreaming.activities.edit.AlarmEditActivity;
+import com.jannick.lipastreaming.activities.edit.DeviceEditActivity;
 import com.jannick.lipastreaming.model.jsonTokens.AlarmToken;
 import com.jannick.lipastreaming.model.jsonTokens.SchedulerToken;
 import com.jannick.lipastreaming.model.jsonTokens.StreamToken;
@@ -52,6 +55,22 @@ public class AlarmAdapter extends ArrayAdapter<AlarmToken.Alarm>{
 
         stream.setText("Stream: "+item.getStream());
 
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), AlarmEditActivity.class);
+                intent.putExtra("id", item.getId());
+                intent.putExtra("name", item.getName());
+                intent.putExtra("time", item.getTime());
+                intent.putExtra("stream", item.getStream());
+                v.getContext().startActivity(intent);
+            }
+        });
+
         return v;
+    }
+
+    public void deleteAlarm(View view){
+
     }
 }

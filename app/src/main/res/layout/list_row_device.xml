@@ -28,23 +28,6 @@
             android:textColor="@color/colorSecondaryText"/>
     </LinearLayout>
 
-
-
-    <Button
-        android:id="@+id/list_row_edit"
-        android:background="@color/colorWhite"
-        android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textColor="@color/colorPrimaryText"
-        android:padding="8dp"
-        android:minHeight="0dp"
-        android:minWidth="64dp"
-        android:textAllCaps="false"
-        android:text="Edit"
-        />
-
     <Button
         android:id="@+id/list_row_select"
         android:textColor="@color/colorWhite"
@@ -52,13 +35,12 @@
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="4dp"
         android:padding="8dp"
         android:minHeight="0dp"
         android:minWidth="64dp"
         android:textAllCaps="false"
         android:text="Select"
-        android:layout_toLeftOf="@id/list_row_edit"
+        android:layout_alignParentRight="true"
         />
 
 </RelativeLayout>

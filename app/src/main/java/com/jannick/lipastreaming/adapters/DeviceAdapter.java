@@ -50,7 +50,6 @@ public class DeviceAdapter extends ArrayAdapter<DevicesToken.Device>{
         TextView name = (TextView)v.findViewById(R.id.device_name);
         TextView desc = (TextView)v.findViewById(R.id.device_desc);
         Button select = (Button)v.findViewById(R.id.list_row_select);
-        Button edit = (Button)v.findViewById(R.id.list_row_edit);
 
         name.setText(item.getName());
         desc.setText(item.getDescription());
@@ -64,7 +63,7 @@ public class DeviceAdapter extends ArrayAdapter<DevicesToken.Device>{
                 public void onClick(View v) {
                     AsyncHttpClient client = new AsyncHttpClient();
                     ServerRequestHandler serverRequestHandler = new ServerRequestHandler(v.getContext());
-                    String url = "http://lipa.kvewijk.nl/android/select_device.php?session="
+                    String url = "http://lipa.kvewijk.nl/android/device/select?session="
                             +serverRequestHandler.getCurrentToken().getSession()
                             +"&device="
                             +item.getDevice();
@@ -84,7 +83,7 @@ public class DeviceAdapter extends ArrayAdapter<DevicesToken.Device>{
             });
         }
 
-        edit.setOnClickListener(new View.OnClickListener() {
+        v.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), DeviceEditActivity.class);

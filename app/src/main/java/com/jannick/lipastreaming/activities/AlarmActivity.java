@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.jannick.lipastreaming.R;
@@ -34,29 +35,7 @@ public class AlarmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarm);
 
-        ServerRequestHandler serverRequestHandler = new ServerRequestHandler(this);
-
-        String session = serverRequestHandler.getLocalPreferences().getString("session","");
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.get(this, "http://lipa.kvewijk.nl/android/alarm?session=" + session, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                String responsestr = new String(responseBody);
-                Gson gson = new Gson();
-                AlarmToken alarmToken = gson.fromJson(responsestr, AlarmToken.class);
-                AlarmToken.Alarm[] array = alarmToken.getAlarms();
-
-                alarms = (ListView) findViewById(R.id.list_alarms);
-                alarmAdapter = new AlarmAdapter(getBaseContext(), array);
-                alarms.setAdapter(alarmAdapter);
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d("parse", "failed device JSON parse");
-            }
-        });
+        refreshLayout();
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -82,5 +61,46 @@ public class AlarmActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        refreshLayout();
+    }
+
+    private void refreshLayout(){
+        ServerRequestHandler serverRequestHandler = new ServerRequestHandler(this);
+
+        String session = serverRequestHandler.getLocalPreferences().getString("session","");
+
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(this, "http://lipa.kvewijk.nl/android/alarm?session=" + session, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                String responsestr = new String(responseBody);
+                Gson gson = new Gson();
+                AlarmToken alarmToken = gson.fromJson(responsestr, AlarmToken.class);
+                AlarmToken.Alarm[] array = alarmToken.getAlarms();
+
+                if(array != null){
+                    alarms = (ListView) findViewById(R.id.list_alarms);
+                    alarmAdapter = new AlarmAdapter(getBaseContext(), array);
+                    alarms.setAdapter(alarmAdapter);
+                }else{
+                    showToast("No alarms added");
+                }
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.d("parse", "failed device JSON parse");
+            }
+        });
+    }
+
+    private void showToast(String s){
+        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
     }
 }

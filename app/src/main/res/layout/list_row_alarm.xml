@@ -57,6 +57,7 @@
         android:minWidth="64dp"
         android:textAllCaps="false"
         android:text="Delete"
+        android:onClick="deleteAlarm"
         />
 
 </RelativeLayout>

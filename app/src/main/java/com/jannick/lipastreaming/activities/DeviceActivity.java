@@ -16,6 +16,7 @@ import com.jannick.lipastreaming.R;
 import com.jannick.lipastreaming.adapters.DeviceAdapter;
 import com.jannick.lipastreaming.handlers.ServerRequestHandler;
 import com.jannick.lipastreaming.model.jsonTokens.DevicesToken;
+import com.jannick.lipastreaming.utils.LinkUtils;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -33,6 +34,37 @@ public class DeviceActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_device);
         activity = this;
+
+        refeshLayout();
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LinkUtils.launchHyperlink(view,"http://lipa.kvewijk.nl/manage/devices");
+            }
+        });
+
+        Toolbar mToolBar;
+        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mToolBar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+        setSupportActionBar(mToolBar);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void refeshLayout(){
         ServerRequestHandler serverRequestHandler = new ServerRequestHandler(this);
 
         url = "http://lipa.kvewijk.nl/android/device?session=" + serverRequestHandler.getLocalPreferences().getString("session","");
@@ -57,33 +89,12 @@ public class DeviceActivity extends AppCompatActivity {
                 Log.d("parse","failed device JSON parse");
             }
         });
-
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-        Toolbar mToolBar;
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
-        setSupportActionBar(mToolBar);
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
+    protected void onResume() {
+        super.onResume();
+        refeshLayout();
     }
 
     @Override
