@@ -3,14 +3,14 @@ package com.jannick.lipastreaming.model.jsonTokens;
 import java.util.List;
 
 /**
- * Created by Jannick on 17-3-2016.
+ * Created by jannick on 27-3-2016.
  */
-public class AlarmToken {
+public class SchedulerToken {
 
     private boolean succes;
     private String device;
 
-    private Alarm[] alarms;
+    private Schedule[] schedules;
 
     public boolean isSucces() {
         return succes;
@@ -28,18 +28,19 @@ public class AlarmToken {
         this.device = device;
     }
 
-    public Alarm[] getAlarms() {
-        return alarms;
+    public Schedule[] getSchedules() {
+        return schedules;
     }
 
-    public void setAlarms(Alarm[] alarms) {
-        this.alarms = alarms;
+    public void setSchedules(Schedule[] schedules) {
+        this.schedules = schedules;
     }
 
-    public static class Alarm {
+    public static class Schedule {
         private int id;
         private String name;
         private String time;
+        private String duration;
         private String stream;
 
         public int getId() {
@@ -64,6 +65,14 @@ public class AlarmToken {
 
         public void setTime(String time) {
             this.time = time;
+        }
+
+        public String getDuration() {
+            return duration;
+        }
+
+        public void setDuration(String duration) {
+            this.duration = duration;
         }
 
         public String getStream() {

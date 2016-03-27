@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.jannick.lipastreaming.R;
 import com.jannick.lipastreaming.adapters.DeviceAdapter;
 import com.jannick.lipastreaming.adapters.StreamAdapter;
+import com.jannick.lipastreaming.handlers.ServerRequestHandler;
 import com.jannick.lipastreaming.model.jsonTokens.DevicesToken;
 import com.jannick.lipastreaming.model.jsonTokens.StreamToken;
 import com.loopj.android.http.AsyncHttpClient;
@@ -31,10 +32,12 @@ public class StreamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stream);
 
-        String device = getIntent().getExtras().getString("device","");
+        ServerRequestHandler serverRequestHandler = new ServerRequestHandler(this);
+
+        String session = serverRequestHandler.getLocalPreferences().getString("session","");
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get(this, "http://lipa.kvewijk.nl/api/streams.php?id="+device, new AsyncHttpResponseHandler() {
+        client.get(this, "http://lipa.kvewijk.nl/android/stream?session="+session, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 String responsestr = new String(responseBody);

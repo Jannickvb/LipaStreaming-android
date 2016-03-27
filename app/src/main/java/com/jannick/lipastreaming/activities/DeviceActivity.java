@@ -35,7 +35,7 @@ public class DeviceActivity extends AppCompatActivity {
         activity = this;
         ServerRequestHandler serverRequestHandler = new ServerRequestHandler(this);
 
-        url = "http://lipa.kvewijk.nl/android/devices.php?session=" + serverRequestHandler.getLocalPreferences().getString("session","");
+        url = "http://lipa.kvewijk.nl/android/device?session=" + serverRequestHandler.getLocalPreferences().getString("session","");
 
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(this,url, new AsyncHttpResponseHandler() {
@@ -50,7 +50,6 @@ public class DeviceActivity extends AppCompatActivity {
 
                 deviceAdapter = new DeviceAdapter(getBaseContext(), list,activity);
                 devices.setAdapter(deviceAdapter);
-
             }
 
             @Override

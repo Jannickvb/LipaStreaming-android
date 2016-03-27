@@ -91,8 +91,7 @@ public final class GridAdapter extends BaseAdapter {
                         LayoutUtils.navigateToActivity(v.getContext(), AlarmActivity.class);
                         break;
                     case "Scheduler":
-                        LayoutUtils.createAlertDialog(v.getContext(),"Sorry","This functionality hasn't been implemented YET");
-//                        LayoutUtils.navigateToActivity(v.getContext(), SchedulerActivity.class);
+                        LayoutUtils.navigateToActivity(v.getContext(), SchedulerActivity.class);
                         break;
                     default:
                         break;
