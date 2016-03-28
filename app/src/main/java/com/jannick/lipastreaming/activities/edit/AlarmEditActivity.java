@@ -199,8 +199,12 @@ public class AlarmEditActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 showToast("failed alarm edit");
             }
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                onBackPressed();
+            }
         });
-        onBackPressed();
     }
     private void showToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT);

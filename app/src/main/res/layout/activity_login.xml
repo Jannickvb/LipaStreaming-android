@@ -67,6 +67,8 @@
             <Button
                 android:id="@+id/user_sign_in_button"
                 style="?android:textAppearanceSmall"
+                android:background="@color/colorAccent"
+                android:textColor="@color/colorWhite"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"

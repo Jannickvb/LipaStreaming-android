@@ -9,6 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -42,7 +45,12 @@ public class DeviceActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                LinkUtils.launchHyperlink(view,"http://lipa.kvewijk.nl/manage/devices");
+                RotateAnimation rotateAnimation = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotateAnimation.setRepeatCount(0);
+                rotateAnimation.setRepeatMode(Animation.RESTART);
+                rotateAnimation.setDuration(1000);
+                view.startAnimation(rotateAnimation);
+                refeshLayout();
             }
         });
 
@@ -92,8 +100,8 @@ public class DeviceActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
+    protected void onStart() {
+        super.onStart();
         refeshLayout();
     }
 

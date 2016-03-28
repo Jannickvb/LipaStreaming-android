@@ -30,4 +30,6 @@
     <string name="url_register">http://lipa.kvewijk.nl/manage/login</string>
     <string name="title_activity_alarm_edit">Edit Alarm</string>
     <string name="title_activity_device_edit">Edit Device</string>
+    <string name="title_activity_stream_edit">Edit Stream</string>
+    <string name="title_activity_schedule_edit">Edit Schedule</string>
 </resources>

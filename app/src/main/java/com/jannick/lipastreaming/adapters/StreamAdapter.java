@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jannick.lipastreaming.R;
+import com.jannick.lipastreaming.activities.edit.AlarmEditActivity;
+import com.jannick.lipastreaming.activities.edit.StreamEditActivity;
 import com.jannick.lipastreaming.model.jsonTokens.StreamToken;
 import com.jannick.lipastreaming.utils.LinkUtils;
 
@@ -43,6 +45,18 @@ public class StreamAdapter extends ArrayAdapter<StreamToken.Stream>{
         String link = "http://"+item.getIp() + "/" + item.getPath();
         LinkUtils.addHyperlinkEvent(btTry,link);
 
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), StreamEditActivity.class);
+                intent.putExtra("id", item.getId());
+                intent.putExtra("name", item.getName());
+                intent.putExtra("ip", item.getIp());
+                intent.putExtra("port", item.getPort());
+                intent.putExtra("path", item.getPath());
+                v.getContext().startActivity(intent);
+            }
+        });
 
         return v;
     }

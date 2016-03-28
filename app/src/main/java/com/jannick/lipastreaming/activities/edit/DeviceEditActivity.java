@@ -88,8 +88,13 @@ public class DeviceEditActivity extends AppCompatActivity {
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 showToast("failed device edit");
             }
+
+            @Override
+            public void onFinish() {
+                super.onFinish();
+                onBackPressed();
+            }
         });
-        onBackPressed();
     }
 
     private void showToast(String message){
