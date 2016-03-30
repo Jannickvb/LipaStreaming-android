@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ListView;
 
 import com.google.gson.Gson;
@@ -32,6 +34,40 @@ public class SchedulerActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scheduler);
 
+
+        refreshLayout();
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                RotateAnimation rotateAnimation = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotateAnimation.setRepeatCount(0);
+                rotateAnimation.setRepeatMode(Animation.RESTART);
+                rotateAnimation.setDuration(1000);
+                view.startAnimation(rotateAnimation);
+                refreshLayout();
+            }
+        });
+        Toolbar mToolBar;
+        mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mToolBar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
+        setSupportActionBar(mToolBar);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void refreshLayout(){
         ServerRequestHandler serverRequestHandler = new ServerRequestHandler(this);
 
         String session = serverRequestHandler.getLocalPreferences().getString("session","");
@@ -56,29 +92,5 @@ public class SchedulerActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        Toolbar mToolBar;
-        mToolBar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBar.setNavigationIcon(R.drawable.ic_arrow_back_24dp);
-        setSupportActionBar(mToolBar);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 }

@@ -39,7 +39,7 @@ public class TimeUtils {
         Calendar c = Calendar.getInstance();
         c.setTime(d);
         DateTime dateTime = new DateTime(d2);
-        c.add(Calendar.HOUR_OF_DAY,dateTime.getHourOfDay());
+        c.add(Calendar.HOUR_OF_DAY,dateTime.getHourOfDay()+1);
         c.add(Calendar.MINUTE,dateTime.getMinuteOfHour());
 
         return sdf.format(c.getTime());

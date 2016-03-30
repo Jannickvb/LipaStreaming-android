@@ -70,7 +70,4 @@ public class AlarmAdapter extends ArrayAdapter<AlarmToken.Alarm>{
         return v;
     }
 
-    public void deleteAlarm(View view){
-
-    }
 }

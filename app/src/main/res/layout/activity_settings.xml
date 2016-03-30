@@ -19,13 +19,72 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay">
-            <Button
-                style="@style/ToolbarSaveButtonStyle"
-                android:onClick="saveSettings" />
+            <!--<Button-->
+                <!--style="@style/ToolbarSaveButtonStyle"-->
+                <!--android:onClick="saveSettings" />-->
         </android.support.v7.widget.Toolbar>
 
     </android.support.design.widget.AppBarLayout>
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="55dp"
+        android:orientation="vertical"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deze app is onderdeel van een groepsproduct gemaakt op Technische Informatica Breda. Deze app is puur voor eigen leerdoelen."/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="32dp"/>
+        <TextView
+            android:textColor="@color/colorAccent"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:layout_width="wrap_content" android:layout_height="wrap_content" android:textAlignment="center"
+            android:text="MEDEWERKERS:"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="16dp"/>
+        <TextView
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Davey Mathijssen"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="16dp"/>
+        <TextView
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kenneth van Ewijk"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="16dp"/>
+        <TextView
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wesley de Hek"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="16dp"/>
+        <TextView
+            android:textSize="18dp"
+            android:textColor="@color/colorPrimaryText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jannick van Ballegooijen"
+            />
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

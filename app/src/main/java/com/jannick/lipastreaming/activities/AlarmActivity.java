@@ -8,6 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -41,8 +43,12 @@ public class AlarmActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                RotateAnimation rotateAnimation = new RotateAnimation(0, 359, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotateAnimation.setRepeatCount(0);
+                rotateAnimation.setRepeatMode(Animation.RESTART);
+                rotateAnimation.setDuration(1000);
+                view.startAnimation(rotateAnimation);
+                refreshLayout();
             }
         });
         Toolbar mToolBar;

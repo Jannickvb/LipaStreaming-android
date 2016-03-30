@@ -19,11 +19,11 @@
     <string name="title_activity_stream">Streams</string>
     <string name="title_activity_scheduler">Scheduler</string>
     <string name="title_activity_main">LiPa Streaming</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_settings">Credits</string>
 
     <!-- Strings related to Settings -->
 
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Credits</string>
     <string name="action_logout">Sign Out</string>
 
     <!-- Strings related to URLS -->

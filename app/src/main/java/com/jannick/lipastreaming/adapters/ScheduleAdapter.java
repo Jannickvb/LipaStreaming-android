@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.jannick.lipastreaming.R;
+import com.jannick.lipastreaming.activities.edit.AlarmEditActivity;
+import com.jannick.lipastreaming.activities.edit.ScheduleEditActivity;
 import com.jannick.lipastreaming.model.jsonTokens.SchedulerToken;
 import com.jannick.lipastreaming.model.jsonTokens.StreamToken;
 import com.jannick.lipastreaming.utils.LinkUtils;
@@ -51,6 +53,19 @@ public class ScheduleAdapter extends ArrayAdapter<SchedulerToken.Schedule>{
                 + TimeUtils.addTime(item.getTime(),item.getDuration()));
 
         stream.setText("Stream: "+item.getStream());
+
+        v.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), ScheduleEditActivity.class);
+                intent.putExtra("id", item.getId());
+                intent.putExtra("name", item.getName());
+                intent.putExtra("time", item.getTime());
+                intent.putExtra("stream", item.getStream());
+                intent.putExtra("duration",item.getDuration());
+                v.getContext().startActivity(intent);
+            }
+        });
 
         return v;
     }

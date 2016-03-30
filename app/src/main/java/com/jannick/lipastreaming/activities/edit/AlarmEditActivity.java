@@ -207,7 +207,9 @@ public class AlarmEditActivity extends AppCompatActivity {
         });
     }
     private void showToast(String message){
-        Toast.makeText(this, message, Toast.LENGTH_SHORT);
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
     }
-
+    public void deleteAlarm(View view){
+        showToast("not implemented");
+    }
 }
